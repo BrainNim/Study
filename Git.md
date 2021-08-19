@@ -9,8 +9,11 @@ EC2 내부에서 git pull을 하려고 했더니 21년 8월 13일부터는 비�
 Windows 자격증명을 설정하는 방법도 있지만, 나는 주로 AWS EC2에 직접 들어가서 pull 명령을 치기 때문에,
 로그인 생략을 설정했다. 물론 보안상 문제가 있을 수야 있겠지만 그렇게 문제가 발생할만한 repository는 아니기 때문에...
 
-
-
+#### 1) GitHub에서 Generate new token
+`[Settings]-[Developer Settings]-[Personal access tokens]`
+#### 2) EC2접속 후 git remote 설정
+`git remote set-url origin https://<토큰>@github.com/<유저이름>/<repository이름>`  
+`예) git remote set-url origin https://tokennumberblablabla@github.com/hhhsss0815/Study`
 
 
 #### 참고블로그
