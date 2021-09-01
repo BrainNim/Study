@@ -37,7 +37,7 @@ data = Dataset.load_from_df(df,reader)
 
 
 ## KNN(K-Nearest Neighbors) algorithmms
-KNN을 활용한 알고리즘
+KNN을 기반으로 가중평균을 구해 가중치를 예측하는 알고리즘
 
 ### (사전에 결정하고 갈 내용) 유사도 추정방식
 Surprise에서는 4가지 방식의 유사도 추정방식을 지원함
@@ -45,17 +45,22 @@ Surprise에서는 4가지 방식의 유사도 추정방식을 지원함
 - `msd` : Mean Squared Difference
 - `pearson` : 피어슨 상관
 - `pearson_baseline` : 피어슨 상관과 달리, 평균값이 아닌 베이스라인 모형에서 예측한 값을 활용해 계산한 상관
+
+### KNNBasic
+
+### KNNWithMeans
+
+### KNNBaseline
+
 예시)
 ``` python
 sim_options = {'name': 'pearson'}
 algorithm = surprise.KNNBasic(sim_options=sim_options)
 result = cross_validate(algorithm, data)
 ```
-### KNNBasic
-- 
-### KNNWithMeans
 
-### KNNBaseline
+## Matrix Factorization-based algorithms
+
 
 
 ## 성능평가
