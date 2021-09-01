@@ -9,24 +9,41 @@
 왜 이제야 알게되었나 싶기도 하고 잘 활용해볼까 싶어서 정리해두려고 한다. ([Surprise공식문서](https://surprise.readthedocs.io/en/stable/))
 
 
-## Reader Class
-유저 ; 아이템 ; rating ; [타임스탬프] 의 형태로 이루어진 데이터를 읽어는 클래스  
-`classsurprise.reader.Reader(name=None, line_format=u'user item rating', sep=None, rating_scale=(1, 5), skip_lines=0)`
+## Reader Class, Dataset Class
+``` python
+reader = Reader()  # Reader(name=None, line_format=u'user item rating', sep=None, rating_scale=(1, 5), skip_lines=0)
+data = Dataset.load_from_df(df,reader)
+```
+- 이때 데이터의 형식 및 칼럼 순서는 아래와 같이 user;item;rating;(timestamp)로 이루어져야 함 (timestamp는 생략 가능)
+
+| user | item | rating | (timestamp) |
+|------|------|--------|-------------|
+|  1   | 2162 | 3.5    | 15621862186 |
+|  1   | 7325 | 4.5    | 15621892318 |
+|  2   | 2162 | 1.0    | 15621921682 |
 
 
-토큰을 발급받은 뒤, 토큰을 어딘가에 저장해두지 않으면 더이상 토큰을 확인할 수 있는 방법이 없기 때문에
-어딘가에 자격증명을 저장해 두어야 한다.
-
-Windows 자격증명을 설정하는 방법도 있지만, 나는 주로 AWS EC2에 직접 들어가서 pull 명령을 치기 때문에,
-로그인 생략을 설정했다. 물론 보안상 문제가 있을 수야 있겠지만 그렇게 문제가 발생할만한 repository는 아니기 때문에...
-
-#### 1) GitHub에서 Generate new token
-`[Settings]-[Developer Settings]-[Personal access tokens]`
-#### 2) EC2접속 후 git remote 설정
-`git remote set-url origin https://<토큰>@github.com/<유저이름>/<repository이름>`  
-`예) git remote set-url origin https://tokennumberblablabla@github.com/hhhsss0815/Study`
 
 
-#### 참고블로그
-- [git 토큰 생성](https://firstquarter.tistory.com/entry/Git-%ED%86%A0%ED%81%B0-%EC%9D%B8%EC%A6%9D-%EB%A1%9C%EA%B7%B8%EC%9D%B8-remote-Support-for-password-authentication-was-removed-on-August-13-2021-Please-use-a-personal-access-token-instead)
-- [git private repo pull할 때 로그인 생략](https://yangeok.github.io/devops/2019/10/30/git-without-login.html)
+## GridSearchCV
+surprise도 GridSearchCV를 지원한다. ([참고](https://surprise.readthedocs.io/en/stable/getting_started.html#load-from-df-example))
+```python
+from surprise import SVD
+from surprise import Dataset
+from surprise.model_selection import GridSearchCV
+
+# Use movielens-100K
+data = Dataset.load_builtin('ml-100k')
+
+param_grid = {'n_epochs': [5, 10], 'lr_all': [0.002, 0.005],
+              'reg_all': [0.4, 0.6]}
+gs = GridSearchCV(SVD, param_grid, measures=['rmse', 'mae'], cv=3)
+
+gs.fit(data)
+
+# best RMSE score
+print(gs.best_score['rmse'])
+
+# combination of parameters that gave the best RMSE score
+print(gs.best_params['rmse'])
+```
