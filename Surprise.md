@@ -23,6 +23,59 @@ data = Dataset.load_from_df(df,reader)
 |  2   | 2162 | 1.0    | 15621921682 |
 
 
+## Basic algorithms
+타 알고리즘들에 대한 성능비교용 알고리즘  
+
+### NormalPredictor
+- 정규분포를 통해 rating을 랜덤으로 예측하는 모델
+
+### BaselineOnly
+- 단순한 형태의 회귀분석모델
+- hat_r(u,i) = mu + b(u) + b(i)
+- 오차함수: Sigma(r(u,i) - hat_r(u,i))^2
+- 오차함수최적화: SGD(Stochastic Gradient Descent) / ALS(Alternating Least Squeares) => method 인수를 통해 선택가능
+
+
+## KNN(K-Nearest Neighbors) algorithmms
+KNN을 활용한 알고리즘
+
+### (사전에 결정하고 갈 내용) 유사도 추정방식
+Surprise에서는 4가지 방식의 유사도 추정방식을 지원함
+- `cosine` : 코사인 유사도
+- `msd` : Mean Squared Difference
+- `pearson` : 피어슨 상관
+- `pearson_baseline` : 피어슨 상관과 달리, 평균값이 아닌 베이스라인 모형에서 예측한 값을 활용해 계산한 상관
+예시)
+``` python
+sim_options = {'name': 'pearson'}
+algorithm = surprise.KNNBasic(sim_options=sim_options)
+result = cross_validate(algorithm, data)
+```
+### KNNBasic
+- 
+### KNNWithMeans
+
+### KNNBaseline
+
+
+## 성능평가
+### RMSE(Root Mean Squared Error)
+### MAE(Mean Absolute Error)
+### FCP(Fraction of Concordant Pairs)
+예시)
+``` python
+# cross validation을 수행하는 경우
+from surprise.model_selection import cross_validate
+'(중략)'
+results = cross_validate(algorithm, data, measures=['RMSE'], cv=3, verbose=False)
+
+
+# accuracy를 평가하는 경우
+from surprise import accuracy
+'(중략)'
+predictions = algorithm.fit(trainset).test(testset)
+accuracy.rmse(predictions)
+```
 
 
 ## GridSearchCV
@@ -47,3 +100,9 @@ print(gs.best_score['rmse'])
 # combination of parameters that gave the best RMSE score
 print(gs.best_params['rmse'])
 ```
+
+
+#### 참고문서
+- [Surprise소개페이지](http://surpriselib.com/)
+- [Surprise공식문서](https://surprise.readthedocs.io/en/stable/)
+- [데이터사이언스스쿨](https://datascienceschool.net/03%20machine%20learning/07.01%20%EC%B6%94%EC%B2%9C%20%EC%8B%9C%EC%8A%A4%ED%85%9C.html)
