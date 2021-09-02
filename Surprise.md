@@ -165,6 +165,94 @@ print(gs.best_score['rmse'])
 print(gs.best_params['rmse'])
 ```
 
+## 결과예측
+### predict 메소드
+알고리즘의 `predict`메소드를 활용하여 유저가 해당 아이템에 몇점을 부여할지 예측하는 방식
+```python
+algorithm.predict(uid, iid, r_ui=None, clip=True, verbose=False)
+
+# Prediction(uid='57', iid='194', r_ui=None, est=4.347066481355011, details={'was_impossible': False})
+```
+#### 파라미터 & 결과값
+##### 파라미터
+- uid: 유저id(raw)
+- iid: 아이템id(raw)
+- r_ui: 실제 유저가 해당 아이템에 몇점을 부여했는가(default: None)
+- clip: 예상치가 rating scale을 벗어날 경우, 해당 rating scale 최대/최솟값으로 변환할 것인가 (default: True)
+예) rating scale은 1~5인데 예상치가 5.5인 경우, 5로 변환함  
+- verbose: verbose(default: False)
+##### 결과값
+- est: 예상 rating
+
+### get_neighbors 메소드
+알고리즘의 `get_neighbors`메소드를 이용하여 (특정 유저와 가까운 유저), (특정 아이템과 가까운 아이템) K개를 찾음
+```python
+algorithm.get_neighbors(iid, k)
+```
+- [x] 주의: KNN관련 알고리즘만 사용가능함
+##### 파라미터
+- iid: inner id(int) => trainset 생성시, 내부 코드가 돌아가기 위해 생성되는 내부용 유저id or 아이템id 
+- [x] 주의: iid 파라미터는 'raw'가 아닌, 'int'임
+- raw id와 inner id간의 변환은 `trainset`의 `to_inner_uid()`, `to_inner_iid()`, `to_raw_uid()`, `to_raw_iid()`메소드를 통해 가능함
+
+### get_top_n 함수 생성
+Surprise 내에 get_top_n 함수는 존재하지 않지만, [공식문서](https://surprise.readthedocs.io/en/stable/FAQ.html#how-to-get-the-top-n-recommendations-for-each-user)에서는 각 유저별로 top_n 아이템을 추천할 수 있는 함수를 만드는 방법을 공개하고 있으며,  
+그 활용방법 역시 매우 간단하다.
+```python
+top_n = get_top_n(predictions, n=10)
+```
+그 함수 내용 및 활용방식 전반은 다음과 같다.
+```python
+from collections import defaultdict
+
+from surprise import SVD
+from surprise import Dataset
+
+
+def get_top_n(predictions, n=10):
+    """Return the top-N recommendation for each user from a set of predictions.
+
+    Args:
+        predictions(list of Prediction objects): The list of predictions, as
+            returned by the test method of an algorithm.
+        n(int): The number of recommendation to output for each user. Default
+            is 10.
+
+    Returns:
+    A dict where keys are user (raw) ids and values are lists of tuples:
+        [(raw item id, rating estimation), ...] of size n.
+    """
+
+    # First map the predictions to each user.
+    top_n = defaultdict(list)
+    for uid, iid, true_r, est, _ in predictions:
+        top_n[uid].append((iid, est))
+
+    # Then sort the predictions for each user and retrieve the k highest ones.
+    for uid, user_ratings in top_n.items():
+        user_ratings.sort(key=lambda x: x[1], reverse=True)
+        top_n[uid] = user_ratings[:n]
+
+    return top_n
+
+
+# First train an SVD algorithm on the movielens dataset.
+data = Dataset.load_builtin('ml-100k')
+trainset = data.build_full_trainset()
+algo = SVD()
+algo.fit(trainset)
+
+# Than predict ratings for all pairs (u, i) that are NOT in the training set.
+testset = trainset.build_anti_testset()
+predictions = algo.test(testset)
+
+top_n = get_top_n(predictions, n=10)
+
+# Print the recommended items for each user
+for uid, user_ratings in top_n.items():
+    print(uid, [iid for (iid, _) in user_ratings])
+```
+
 
 #### 참고문서
 - [Surprise소개페이지](http://surpriselib.com/)
