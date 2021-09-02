@@ -9,3 +9,10 @@
 
 ## [BeautifulSoup](https://github.com/BrainNim/Study/blob/main/BeautifulSoup.md)
 - soup.select 활용방식
+
+## [Surprise](https://github.com/BrainNim/Study/blob/main/Surprise.md)
+- Basic algorithms
+- KNN algorithms
+- Matrix Factorization-based algorithms
+- 성능평가
+- 결과예측
