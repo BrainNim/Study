@@ -45,6 +45,19 @@ Surprise에서는 4가지 방식의 유사도 추정방식을 지원함
 - `msd` : Mean Squared Difference
 - `pearson` : 피어슨 상관
 - `pearson_baseline` : 피어슨 상관과 달리, 평균값이 아닌 베이스라인 모형에서 예측한 값을 활용해 계산한 상관
+<details>
+<summary>참고. sim_options default 값 (접기/펼치기)</summary>
+<div markdown="1">
+
+|             |                                                                                            |
+|-------------|--------------------------------------------------------------------------------------------|
+| name        | 'MSD'                                                                                      |
+| user_based  | True                                                                                       |
+| min_support | (user_based=True) : common items의 최소 숫자 <br> (user_based=False) : common users의 최소 숫자 |
+| shrinkage   | 100 (pearson_baseline에서만 사용)                                                          |
+</div>
+</details>
+
 
 ### KNNBasic
 
@@ -58,10 +71,57 @@ sim_options = {'name': 'pearson'}
 algorithm = surprise.KNNBasic(sim_options=sim_options)
 result = cross_validate(algorithm, data)
 ```
+<details>
+<summary>참고. 파라미터 default 값 (접기/펼치기)</summary>
+<div markdown="1">
+
+|             | KNNBasic | KNNWithMeans | KNNWithZScore |
+|-------------|----------|--------------|---------------|
+| k           | 40       | 40           | 40            |
+| min_k       | 1        | 1            | 1             |
+| sim_options | (dict)   | (dict)       | (dict)        |
+| bsl_options | (dict)   | (dict)       | (dict)        |
+| verbose     | True     | True         | True          |
+</div>
+</details>
 
 ## Matrix Factorization-based algorithms
+- `SVD`
+- `SVDpp`
+- `NMF`
 
-
+예시)
+``` python
+algorithm = surprise.SVD(n_factors=15)
+result = cross_validate(algorithm, data)
+```
+<details>
+<summary>참고. 파라미터 default 값 (접기/펼치기)</summary>
+<div markdown="1">
+  
+|              | SVD   | SVDpp | NMF   |
+|--------------|-------|-------|-------|
+| n_factors    | 100   | 20    | 15    |
+| n_epochs     | 20    | 20    | 50    |
+| biased       | True  |       | False |
+| init_mean    | 0     | 0     |       |
+| init_std_dev | 0.1   | 0.1   |       |
+| lr_all       | 0.005 | 0.007 |       |
+| reg_all      | 0.02  | 0.02  |       |
+| lr_bu        | None  | None  | 0.005 |
+| lr_bi        | None  | None  | 0.005 |
+| lr_pu        | None  | None  |       |
+| lr_qi        | None  | None  |       |
+| reg_bu       | None  | None  | 0.02  |
+| reg_bi       | None  | None  | 0.02  |
+| reg_pu       | None  | None  | 0.06  |
+| reg_qi       | None  | None  | 0.06  |
+| random_state | None  | None  | None  |
+| verbose      | False | False | False |
+| init_low     |       |       | 0     |
+| init_high    |       |       | 1     |
+</div>
+</details>
 
 ## 성능평가
 ### RMSE(Root Mean Squared Error)
@@ -73,7 +133,6 @@ result = cross_validate(algorithm, data)
 from surprise.model_selection import cross_validate
 '(중략)'
 results = cross_validate(algorithm, data, measures=['RMSE'], cv=3, verbose=False)
-
 
 # accuracy를 평가하는 경우
 from surprise import accuracy
