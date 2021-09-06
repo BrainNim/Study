@@ -33,5 +33,15 @@
 - [Linux에 Python, pip 및 EB CLI 설치](https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/eb-cli3-install-linux.html)
 
 ### 우분투
-### pip 설치
+#### 1) pip 설치
 `sudo apt install python3-pip`
+#### 2) PATH 설정
+- 홈 디렉토리(~/)에서 vim으로 `.bashrc` 파일을 연다
+- 맨 마지막 줄에 다음과 같이 입력하고 저장한다
+```
+export PATH="(사용할 경로):$PATH"
+# export PATH="/home/ubuntu/.local:$PATH"
+```
+
+#### 참고문서
+- [우분투 pip install path설정](https://www.tuwlab.com/ece/231)
