@@ -45,3 +45,12 @@ export PATH="(사용할 경로):$PATH"
 
 #### 참고문서
 - [우분투 pip install path설정](https://www.tuwlab.com/ece/231)
+
+
+## netstat 활용
+#### 설치
+`sudo apt install net-tools`
+#### PID 확인
+`netstat -lntp`
+#### PID 강제종료
+`sudo kill -9 {pid번호}`
