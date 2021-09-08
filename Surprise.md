@@ -252,13 +252,7 @@ top_n = get_top_n(predictions, n=10)
 for uid, user_ratings in top_n.items():
     print(uid, [iid for (iid, _) in user_ratings])
 ```
-#### 210904 추가내용
-Surprise의 데이터셋(Movielens 100k)을 통해 get_top_n 함수를 실행해본 결과(n=10) 몇가지 문제가 발생하는 것을 발견함
-- n=10 조건에서 10개가 아닌, 5개, 3개 등, n보다 모자르는 개수의 item만을 결과로 도출해내는 경우가 있음
-- 위의 경우, raw하게 검색해 보면, 도출된 결과보다 더 높은 rating으로 예측되는 item들도 있음
-- n=10 조건에서 10개 딱 맞게 item을 도출한 경우 역시, raw하게 검색해보면 top10보다 더 높은 rating으로 예측되는 item들 역시 있음
-- 즉, 함수를 통해 예상top10을 추출해도 정말 전체 예상치 중 top10은 아니며, 심지어 개수가 모자를 때도 있음
--> 코드를 천천히 뜯어보며 검증해 볼 필요가 있어보임
+
 
 
 
