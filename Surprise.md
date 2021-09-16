@@ -62,7 +62,6 @@ Surprise에서는 4가지 방식의 유사도 추정방식을 지원함
 ### KNNBasic
 
 ### KNNWithMeans
-
 ### KNNBaseline
 
 예시)
@@ -88,7 +87,9 @@ result = cross_validate(algorithm, data)
 ## Matrix Factorization-based algorithms
 - `SVD`
 - `SVDpp`
-- `NMF`
+- `NMF`: Non-negative Matrix Factorization(음수 미포함 행렬 분해) 기반
+- `SlopeOne`:[참고문헌](https://arxiv.org/abs/cs/0702144)
+- `Co-clustering`:[참고문헌](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.113.6458&rep=rep1&type=pdf)
 
 예시)
 ``` python
