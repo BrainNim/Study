@@ -14,4 +14,11 @@ BeautifulSoup를 활용하는 건 정말 간단하고 쉽다.
 `soup.select('태그명 > 바로아래태그명 > 그바로아래태그명')`  # 태그 > 자식 > 자식  
 `soup.select('태그명 > 바로아래태그명 멀리있는하위태그명')`  # 태그 > 자식 자손  
 
+- 불필요한 하위 태그 제거
+```python
+sample = soup.select_one('태그명')
+sample.불필요태그명.decompose()
+print(sample)
+```
+
 이걸 기억 못해서 정리한다니...
