@@ -77,8 +77,12 @@ Library.zip
 3) [Library] 폴더 압축 
 
 #### 주의
-- pandas, numpy를 Lambda에서 사용할 경우, 일반적인 pip install pandas를 사용하면 안됨
-- Amazon Linux와 호환되는 pandas, numpy를 다운받아야 하기 때문.
-- numpy: *numpy-1.18.1-cp(버전)-cp(버전)m-manylinux1_x86_64.whl 를 [다운로드](https://pypi.org/project/numpy/#files)
+- numpy, scipy, pandas 등dmf Lambda에서 사용할 경우, 일반적인 pip install pandas를 사용하면 안됨
+- Amazon Linux와 호환되는 버전을 활용해야 하기 때문.
+##### numpy
+- AWSLambda-Python38-SciPy1x 레이어를 이용하면 numpy, scipy를 활용가능함
+- 참고(https://aws.amazon.com/ko/blogs/korea/new-for-aws-lambda-use-any-programming-language-and-share-common-components/)
+##### pandas
 - pandas: *manylinux_x86_64.whl 패키지 중 자신이 설정한 python 버전에 맞는 것을 [다운로드](https://pypi.org/project/pandas/#files)
 - `unzip {.whl}`
+- [참고](https://smartshk.tistory.com/9)
