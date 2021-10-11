@@ -61,8 +61,22 @@ export PATH="(사용할 경로):$PATH"
 특히 layers의 경우 초기에만 작업을 하다보니 세부적인걸 까먹고 오류가 발생해서
 매번 어디서 실수했던건지 다시 검색하게 된다. 정리해두자.
 
+## 라이브러리 설치, Layer(계층) layer
+Lambda는 기본적인 라이브러리조차 가지고 있지 않기 때문에, 
+추가적으로 라이브러리를 설치, 삽입해 layer를 설정해 줄 필요가 있음.
 
-## Library.zip 생성
+### arns를 활용하는 방법
+역시 다른 똑똑하고 부지런한 사람이 만들어 놓은 것을 활용하는 것이 가장 편하다.
+다양한 라이브러리에 대한 arns를 Ctrl+C, Ctrl+V 하면 간단하게 해결 가능하다.  
+
+#### layer 설정
+- 만들어둔 함수의 하단에서 [Add a layer] 클릭
+- 계층소스 = ARN 지정
+- 필요한 ARN layer는 [서울리젼(ap-northeast-2) python3.8 기준 arns정보](https://github.com/keithrozario/Klayers/blob/master/deployments/python3.8/arns/ap-northeast-2.csv)를 참조
+
+
+### manual 방식으로 라이브러리.zip을 활용하는 방법
+
 #### Library.zip의 형태
 ```
 Library.zip
@@ -79,7 +93,7 @@ Library.zip
 #### 주의
 - numpy, scipy, pandas 등dmf Lambda에서 사용할 경우, 일반적인 pip install pandas를 사용하면 안됨
 - Amazon Linux와 호환되는 버전을 활용해야 하기 때문.
-- 
+
 ##### numpy
 AWSLambda-Python38-SciPy1x 레이어를 이용하면 numpy, scipy를 활용가능함. [(참고)](https://aws.amazon.com/ko/blogs/korea/new-for-aws-lambda-use-any-programming-language-and-share-common-components/)
 
@@ -89,5 +103,6 @@ pytz-{버전}-py2.py3-none-any.whl [다운로드](https://pypi.org/project/pytz/
 다운받은 .whl 파일의 압축을 해제  
 linux에서 작업할 경우: `unzip {.whl}`  
 window에서 작업할 경우: `pip install wheel -> wheel unpack {.whl}`  
-  
 [참고1](https://smartshk.tistory.com/9),[참고2](https://www.youtube.com/watch?v=1UDEp90S9h8)  
+
+
