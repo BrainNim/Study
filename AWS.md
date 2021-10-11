@@ -79,10 +79,15 @@ Library.zip
 #### 주의
 - numpy, scipy, pandas 등dmf Lambda에서 사용할 경우, 일반적인 pip install pandas를 사용하면 안됨
 - Amazon Linux와 호환되는 버전을 활용해야 하기 때문.
+- 
 ##### numpy
-- AWSLambda-Python38-SciPy1x 레이어를 이용하면 numpy, scipy를 활용가능함
-- 참고(https://aws.amazon.com/ko/blogs/korea/new-for-aws-lambda-use-any-programming-language-and-share-common-components/)
+AWSLambda-Python38-SciPy1x 레이어를 이용하면 numpy, scipy를 활용가능함. [(참고)](https://aws.amazon.com/ko/blogs/korea/new-for-aws-lambda-use-any-programming-language-and-share-common-components/)
+
 ##### pandas
-- pandas: *manylinux_x86_64.whl 패키지 중 자신이 설정한 python 버전에 맞는 것을 [다운로드](https://pypi.org/project/pandas/#files)
-- `unzip {.whl}`
-- [참고](https://smartshk.tistory.com/9)
+pandas: manylinux_x86_64.whl 패키지 중 자신이 설정한 python 버전에 맞는 것을 [다운로드](https://pypi.org/project/pandas/#files)  
+pytz-{버전}-py2.py3-none-any.whl [다운로드](https://pypi.org/project/pytz/#files)  
+다운받은 .whl 파일의 압축을 해제  
+linux에서 작업할 경우: `unzip {.whl}`  
+window에서 작업할 경우: `pip install wheel -> wheel unpack {.whl}`  
+  
+[참고1](https://smartshk.tistory.com/9),[참고2](https://www.youtube.com/watch?v=1UDEp90S9h8)  
