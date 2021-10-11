@@ -54,3 +54,31 @@ export PATH="(사용할 경로):$PATH"
 `netstat -lntp`
 #### PID 강제종료
 `sudo kill -9 {pid번호}`
+
+
+
+# AWS Lambda layers 설정과 함수설정
+특히 layers의 경우 초기에만 작업을 하다보니 세부적인걸 까먹고 오류가 발생해서
+매번 어디서 실수했던건지 다시 검색하게 된다. 정리해두자.
+
+
+## Library.zip 생성
+#### Library.zip의 형태
+```
+Library.zip
+   ㄴ Python
+        ㄴ bs4
+        ㄴ ...
+```
+
+#### 각 라이브러리의 설치, Library.zip 생성
+1) 설치할 [Library]-[python] 폴더에서 cmd 열기
+2) `pip install {라이브러리 이름} -t .`
+3) [Library] 폴더 압축 
+
+#### 주의
+- pandas, numpy를 Lambda에서 사용할 경우, 일반적인 pip install pandas를 사용하면 안됨
+- Amazon Linux와 호환되는 pandas, numpy를 다운받아야 하기 때문.
+- numpy: *numpy-1.18.1-cp(버전)-cp(버전)m-manylinux1_x86_64.whl 를 [다운로드](https://pypi.org/project/numpy/#files)
+- pandas: *manylinux_x86_64.whl 패키지 중 자신이 설정한 python 버전에 맞는 것을 [다운로드](https://pypi.org/project/pandas/#files)
+- `unzip {.whl}`
