@@ -17,3 +17,6 @@
 - Matrix Factorization-based algorithms
 - 성능평가
 - 결과예측
+
+## [OpenCV](https://github.com/BrainNim/Study/blob/main/OpenCV.md)
+- 
