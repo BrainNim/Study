@@ -19,4 +19,4 @@
 - 결과예측
 
 ## [OpenCV](https://github.com/BrainNim/Study/blob/main/OpenCV.md)
-- 
+- 얼굴인식
