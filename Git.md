@@ -20,3 +20,17 @@ Windows 자격증명을 설정하는 방법도 있지만, 나는 주로 AWS EC2�
 - [git 토큰 생성](https://firstquarter.tistory.com/entry/Git-%ED%86%A0%ED%81%B0-%EC%9D%B8%EC%A6%9D-%EB%A1%9C%EA%B7%B8%EC%9D%B8-remote-Support-for-password-authentication-was-removed-on-August-13-2021-Please-use-a-personal-access-token-instead)
 - [git private repo pull할 때 로그인 생략](https://yangeok.github.io/devops/2019/10/30/git-without-login.html)
 
+
+## git default branch 이름 수정
+```bash
+git branch -m master main
+git fetch origin
+```
+
+## github push 관련 오류
+#### 1) [rejected] master -> master (fetch first) 에러
+- 기존 local repository를 제거하고 새로 git init을 실행하여 푸쉬하는 등, 기존데이터가 손실될 우려로 푸쉬를 막은 경우에 발생
+- +를 붙여서 강제로 푸쉬시키면 해결
+```bash
+git push origin +master
+```
