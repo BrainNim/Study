@@ -32,5 +32,5 @@ git fetch origin
 - 기존 local repository를 제거하고 새로 git init을 실행하여 푸쉬하는 등, 기존데이터가 손실될 우려로 푸쉬를 막은 경우에 발생
 - +를 붙여서 강제로 푸쉬시키면 해결
 ```bash
-git push origin +master
+git push origin +master 
 ```
