@@ -1,5 +1,4 @@
 # Study
-자꾸 까먹어서 매번 검색하기 귀찮아서 내가 보려고 정리해두는 정보들
 
 ## [AWS](https://github.com/BrainNim/Study/blob/main/AWS.md)
 - AWS EC2 인스턴스 생성시 초기설정
@@ -20,3 +19,7 @@
 
 ## [OpenCV](https://github.com/BrainNim/Study/blob/main/OpenCV.md)
 - 얼굴인식
+
+
+## K-MOOC
+- 코딩으로 배우는 일반화학([K-mooc 링크](http://www.kmooc.kr/courses/course-v1:POSTECHk+CHEM101+2021_T2/about))
