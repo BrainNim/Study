@@ -56,6 +56,24 @@ export PATH="(사용할 경로):$PATH"
 `sudo kill -9 {pid번호}`
 
 
+## nohup 활용
+#### nohup 로그 확인
+#### 기본  
+tail 명령어를 활용해 마지막 로그 (default:10 lines)를 확인  
+`tail nohup.out`  
+#### 옵션
+`-f`: 실시간 로그를 계속 출력  
+예) `tail -f nohup.out`
+
+`-n`: 원하는 수의 라인을 출력  
+예) `tail -n 5 nohup.out`
+
+`| grep`: 특정 패턴이 들어간 라인만 출력  
+예) `tail -f nohup.out | grep "recommend"`
+
+#### 참고문서
+- [nohup.out 원하는 로그 보기 (tail 명령어)](https://seongbindb.tistory.com/146)
+
 
 # AWS Lambda layers 설정과 함수설정
 특히 layers의 경우 초기에만 작업을 하다보니 세부적인걸 까먹고 오류가 발생해서
