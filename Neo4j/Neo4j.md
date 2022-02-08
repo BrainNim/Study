@@ -89,3 +89,18 @@ CREATE (p)-[w:WATCHED]->(m)
 RETURN type(w)
 ```
 ![image](https://user-images.githubusercontent.com/87905878/152903476-c1720d16-aa97-474e-b5f6-1108b967b084.png) 관계가 새로 생성됨
+
+
+### Advanced Cypher queries
+
+#### Finding all people who have co-acted with Tom Hanks in any movie
+```MATCH (tom:Person {name: "Tom Hanks"})-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(p:Person) return p,m,tom```
+![image](https://user-images.githubusercontent.com/87905878/152905516-0ee8b99e-da27-48a4-adb2-8e8545aeb23f.png)  
+
+```MATCH (p:Person)-[relatedTo]-(m:Movie {title: "Cloud Atlas"}) return p.name, type(relatedTo) as relatedTo```
+![image](https://user-images.githubusercontent.com/87905878/152905873-34441437-1df3-4af5-b4e6-e932f3bc7dc9.png)
+
+
+```MATCH (p:Person {name: 'Kevin Bacon'})-[*1..3]-(hollywood) return DISTINCT p, hollywood```
+![image](https://user-images.githubusercontent.com/87905878/152906902-370ca489-f67f-45d8-9b41-542b96285329.png)  
+Distinct: Table 형식으로 볼 때 동일한 노드, 관계 등에 대한 중복출력 방지(그래프형식으로 볼 때는 똑같은 결과)
