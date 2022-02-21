@@ -43,4 +43,15 @@ cat test.log
 ```
 crontab -r
 ```
-단, 모든 설정이 모두 삭제되니 
+단, 모든 설정이 모두 삭제되니 주의
+
+
+### 3. trouble shooting
+#### Permission denied 권한 문제
+![image](https://user-images.githubusercontent.com/87905878/154897008-9dbad366-b497-4e9d-8faf-1b771c6627f5.png)
+권한이 성정되지 않았다면 권한을 부여한다.
+
+```
+# chmod +x denied된 파일
+chmod +x /tmp/crontab.0uh955
+```
