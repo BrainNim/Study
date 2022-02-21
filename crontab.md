@@ -34,24 +34,30 @@ service cron restart
 service cron status
 ```
 
-#### 3. 결과 확인
+#### 3) 결과 확인
 ```
 cat test.log
 ```
 
-#### 4. crontab 설정 삭제
+#### 4) crontab 설정 삭제
 ```
 crontab -r
 ```
 단, 모든 설정이 모두 삭제되니 주의
 
 
-### 3. trouble shooting
-#### Permission denied 권한 문제
-![image](https://user-images.githubusercontent.com/87905878/154897008-9dbad366-b497-4e9d-8faf-1b771c6627f5.png)
-권한이 성정되지 않았다면 권한을 부여한다.
 
+### 3. trouble shooting
+#### 1) Permission denied 권한 문제 : crontab -e
+![image](https://user-images.githubusercontent.com/87905878/154897008-9dbad366-b497-4e9d-8faf-1b771c6627f5.png)  
+- 위의 에러는 아래와 같이 /tmp 파일에 대한 권한이 잘못된 경우
 ```
-# chmod +x denied된 파일
-chmod +x /tmp/crontab.0uh955
+$ ls -ld /tmp/
+# dr-xr-xr-x 133 root root 20480 Feb 21 15:12 /tmp.
 ```
+- ![image](https://user-images.githubusercontent.com/87905878/154903631-e1f68f26-4193-47be-a0fd-36045eba5ba1.png)
+- 이 경우 아래와 같이 권한을 복원한다.
+```
+$ chmod 1777 /tmp
+```
+
