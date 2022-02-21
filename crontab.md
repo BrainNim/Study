@@ -9,9 +9,17 @@ crontab -e
 ```  
 #### 2) crontab 수정
 ```
-python3 /home/ubuntu/test.py >> /home/ubuntu/test.log
+*         *           *         *          *
+분(0-59)  시간(0-23)  일(1-31)   월(1-12)   요일(0-7,일월~토일)
 ```
-해당 경로의 test.py를 실행, 그 print결과를 test.log 파일에 저장
+
+```
+* * * * 1-5 python3 /home/ubuntu/test.py >> /home/ubuntu/test.log
+```
+평일에만 매분 해당 경로의 test.py를 실행, 그 print결과를 test.log 파일에 저장
+
+
+
 
 
 ### 2. crontab 상태확인
@@ -22,7 +30,7 @@ crontab -l
 
 #### 2) crontab 재실행 후 상태 확인
 ```
-service cron srestart
+service cron restart
 service cron status
 ```
 
