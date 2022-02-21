@@ -23,6 +23,7 @@
 | LIMIT   |                                                    |                                                              |
 | USE     | 사용하는 DB 선택                                    | 주로 Fabric DB에서 사용                                       |
 
+[참고](https://wildwhale.github.io/neo4j,/cypher/neo4j-clause-post/)
 
 ## Movies Project Tutorial
 미국영화 데이터를 활용해 Neo4j와 Cypher의 기본 배우기 ([링크](https://github.com/BrainNim/Study/blob/main/Neo4j/1_Movies_Project_tutorial.md))
