@@ -55,9 +55,9 @@ crontab -r
 $ ls -ld /tmp/
 # dr-xr-xr-x 133 root root 20480 Feb 21 15:12 /tmp.
 ```
-- ![image](https://user-images.githubusercontent.com/87905878/154903631-e1f68f26-4193-47be-a0fd-36045eba5ba1.png)
+![image](https://user-images.githubusercontent.com/87905878/154903631-e1f68f26-4193-47be-a0fd-36045eba5ba1.png)
 - 이 경우 아래와 같이 권한을 복원한다.
 ```
 $ chmod 1777 /tmp
 ```
-
+[참고자료](https://www.thegeekdiary.com/user-unable-to-edit-crontab-error-tmp-crontab-lm34gsjv-permission-denied/)
