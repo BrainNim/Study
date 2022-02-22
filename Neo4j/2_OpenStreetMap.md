@@ -52,3 +52,56 @@ WITH relationships(path) AS rels
 UNWIND rels AS rel
 RETURN sum(rel.distance)
 ```
+
+<details markdown="1">
+  <summary>경로상 거리 상세과정(접기/펼치기)</summary>
+  
+##### 1. 전체 path 확인
+```
+MATCH path=shortestpath((p1:PointOfInterest {type:'clock'})-[:ROUTE*]-(p2:PointOfInterest {name:'Zoo School'}))
+RETURN *
+```
+![image](https://user-images.githubusercontent.com/87905878/155057823-bf8dd068-a111-4330-9747-4d0cd107be88.png)
+
+##### 2. WITH - relationships 구문 : 각 관계를 종합추출
+```
+MATCH path=shortestpath((p1:PointOfInterest {type:'clock'})-[:ROUTE*]-(p2:PointOfInterest {name:'Zoo School'}))
+WITH relationships(path) AS rels
+RETURN rels
+```
+- 하나의 json으로 묶여있음 (1 records)
+![image](https://user-images.githubusercontent.com/87905878/155059492-10ff0f06-51c7-45f5-ac80-299514768002.png)
+
+##### 3. UNWIND : relationships결과를 개별 행으로 변환
+```
+MATCH path=shortestpath((p1:PointOfInterest {type:'clock'})-[:ROUTE*]-(p2:PointOfInterest {name:'Zoo School'}))
+WITH relationships(path) AS rels
+UNWIND rels AS rel
+RETURN *
+```
+- 개별 행으로 변환 (7 records)
+![image](https://user-images.githubusercontent.com/87905878/155059544-6fb9d938-b1b1-45ea-8996-5925e56f32c8.png)
+
+
+</details>
+
+
+### time for a coffee and cycle (node상 짧은 경로 weight가 작은 경로)
+#### node상 짧은 경로
+- `shortestPath()`
+- 두 구간 사이의 node 개수가 가장 작은 경로를 산출
+```
+MATCH path = shortestPath((p1:PointOfInterest {type:'cafe'})-[:ROUTE*]-(p2:PointOfInterest {type:'bicycle rental'}))
+WITH p1, p2, relationships(path) AS rels //extract all the relationships in the path as an array
+UNWIND rels AS rel //unwind the array of relationships
+RETURN p1.name, p2.name, sum(rel.distance) AS dist ORDER BY dist
+```
+
+#### weight가 작은 경로
+- `apoc.algo.dijkstra()`
+- 두 구간 사이의 property - weight가 가장 작은 경로를 산출
+```
+MATCH path = (p1:PointOfInterest {type:'cafe'}),(p2:PointOfInterest {type:'bicycle rental'})
+CALL apoc.algo.dijkstra(p1, p2, 'ROUTE', 'distance') YIELD weight AS dist
+RETURN p1.name, p2.name, dist ORDER BY dist
+```
