@@ -25,7 +25,7 @@
 
 ## MOOC
 ### K-MOOC
-- [코딩으로 배우는 일반화학](https://github.com/BrainNim/Study/tree/main/K-MOOC/%EC%BD%94%EB%94%A9%EC%9C%BC%EB%A1%9C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9D%BC%EB%B0%98%ED%99%94%ED%95%99)([K-mooc 링크](http://www.kmooc.kr/courses/course-v1:POSTECHk+CHEM101+2021_T2/about))
+- [코딩으로 배우는 일반화학](https://github.com/BrainNim/Study/tree/main/K-MOOC/%EC%BD%94%EB%94%A9%EC%9C%BC%EB%A1%9C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9D%BC%EB%B0%98%ED%99%94%ED%95%99)([K-mooc 링크](http://www.kmooc.kr/courses/course-v1:POSTECHk+CHEM101+2021_T2/about), [Certificate](http://www.kmooc.kr/certificates/0ee94da614a64aa596323a33ad4b0870))
 
 ### Coursera
 - AI for Everyone([강의링크](https://www.coursera.org/learn/ai-for-everyone), [Certificate](https://coursera.org/share/fb25fcdecf012ee1203df61cb7893b31))
