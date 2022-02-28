@@ -29,3 +29,4 @@
 
 ### Coursera
 - AI for Everyone([강의링크](https://www.coursera.org/learn/ai-for-everyone), [Certificate](https://coursera.org/share/fb25fcdecf012ee1203df61cb7893b31))
+- Neural Network and Deep Learning([강의링크](https://www.coursera.org/learn/neural-networks-deep-learning), [Certificate](https://coursera.org/share/e7041b9a1c103d26770fd8e0c4d6bf54))
