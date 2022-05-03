@@ -17,9 +17,14 @@ crontab -e
 * * * * 1-5 python3 /home/ubuntu/test.py >> /home/ubuntu/test.log
 ```
 평일에만 매분 해당 경로의 test.py를 실행, 그 print결과를 test.log 파일에 저장
-
-
-
+  
+  
+##### 출력 리다이렉션(output redirection)
+```
+* * * * 1-5 python3 /home/ubuntu/test.py >> /home/ubuntu/test.log 2>&1
+```
+`0 = stdIn, 1 = stdout, 2 = stderr`  
+`2>&1` : 표준에러(stderr)도 test.log에 
 
 
 ### 2. crontab 상태확인
