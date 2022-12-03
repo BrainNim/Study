@@ -11,4 +11,8 @@ class Calculator:
             return "INVALID"
 
         month_amount = pay_amount/10000
+
+        if (month_amount / 10) >= 1:
+            month_amount += 2
+
         return pay_date + relativedelta(months=month_amount)

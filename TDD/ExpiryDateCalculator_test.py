@@ -39,3 +39,7 @@ class ExpiryDateCalculatorTest(unittest.TestCase):
     def test_pay_that_not_divided_by_10000_then_INVALID(self):
         self.assertExpiryDate("231031", 15000, "INVALID")
         self.assertExpiryDate("221231", 27000, "INVALID")
+
+    def test_pay_100000_then_1_year(self):
+        self.assertExpiryDate("230101", 100000, "240101")
+        self.assertExpiryDate("240215", 100000, "250215")
