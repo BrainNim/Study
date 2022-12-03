@@ -8,7 +8,8 @@ class ExpiryDateCalculatorTest(unittest.TestCase):
 
     def assertExpiryDate(self, pay_date, pay_amount, real_expiry_date):
         pay_date = datetime.strptime(pay_date, "%y%m%d")
-        real_expiry_date = datetime.strptime(real_expiry_date, "%y%m%d")
+        if real_expiry_date != "INVALID":
+            real_expiry_date = datetime.strptime(real_expiry_date, "%y%m%d")
         estimate_expiry_date = self.cal.calculateExpiryDate(pay_date, pay_amount)
         self.assertEqual(estimate_expiry_date, real_expiry_date)
 
@@ -30,3 +31,7 @@ class ExpiryDateCalculatorTest(unittest.TestCase):
         self.assertExpiryDate("200112", 60000, "200712")
         self.assertExpiryDate("231031", 40000, "240229")
         self.assertExpiryDate("230530", 90000, "240229")
+
+    def test_pay_0_or_minus_then_Invalid(self):
+        self.assertExpiryDate("200112", -10000, "INVALID")
+        self.assertExpiryDate("231031", 0, "INVALID")
