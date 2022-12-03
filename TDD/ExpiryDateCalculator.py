@@ -7,5 +7,8 @@ class Calculator:
         if pay_amount <= 0:
             return "INVALID"
 
+        if (pay_amount % 10000) > 0:
+            return "INVALID"
+
         month_amount = pay_amount/10000
         return pay_date + relativedelta(months=month_amount)
