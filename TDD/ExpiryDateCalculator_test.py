@@ -9,17 +9,12 @@ class ExpiryDateCalculatorTest(unittest.TestCase):
     def test_pay_10000_then_1_month(self):
         pay_amount = 10000
 
-        pay_date = datetime.strptime("221205", "%y%m%d")
-        estimate_expiriy_date = self.cal.calculateExpiryDate(pay_date, pay_amount)
-        real_expiry_date = datetime.strptime("230105", "%y%m%d")
-        self.assertEqual(estimate_expiriy_date, real_expiry_date)
+        self.assertExpiryDate("221205", pay_amount, "230105")
+        self.assertExpiryDate("220131", pay_amount, "220228")
+        self.assertExpiryDate("230531", pay_amount, "230630")
 
-        pay_date = datetime.strptime("220131", "%y%m%d")
-        estimate_expiriy_date = self.cal.calculateExpiryDate(pay_date, pay_amount)
-        real_expiry_date = datetime.strptime("220228", "%y%m%d")
-        self.assertEqual(estimate_expiriy_date, real_expiry_date)
-
-        pay_date = datetime.strptime("230531", "%y%m%d")
-        estimate_expiriy_date = self.cal.calculateExpiryDate(pay_date, pay_amount)
-        real_expiry_date = datetime.strptime("230630", "%y%m%d")
-        self.assertEqual(estimate_expiriy_date, real_expiry_date)
+    def assertExpiryDate(self, pay_date, pay_amount, real_expiry_date):
+        pay_date = datetime.strptime(pay_date, "%y%m%d")
+        real_expiry_date = datetime.strptime(real_expiry_date, "%y%m%d")
+        estimate_expiry_date = self.cal.calculateExpiryDate(pay_date, pay_amount)
+        self.assertEqual(estimate_expiry_date, real_expiry_date)
