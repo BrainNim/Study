@@ -6,12 +6,18 @@ from ExpiryDateCalculator import Calculator
 class ExpiryDateCalculatorTest(unittest.TestCase):
     cal = Calculator()
 
-    def assertExpiryDate(self, pay_date, pay_amount, real_expiry_date, last_expiry_date=None):
+    def assertExpiryDate(self, pay_date, pay_amount, real_expiry_date, last_expiry_date=None, first_pay_date=None):
         pay_date = datetime.strptime(pay_date, "%y%m%d")
         if real_expiry_date != "INVALID":
             real_expiry_date = datetime.strptime(real_expiry_date, "%y%m%d")
 
-        estimate_expiry_date = self.cal.calculateExpiryDate(pay_date, pay_amount, last_expiry_date)
+        if last_expiry_date:
+            last_expiry_date = datetime.strptime(last_expiry_date, "%y%m%d")
+
+        if first_pay_date:
+            first_pay_date = datetime.strptime(first_pay_date, "%y%m%d")
+
+        estimate_expiry_date = self.cal.calculateExpiryDate(pay_date, pay_amount, last_expiry_date, first_pay_date)
 
         self.assertEqual(estimate_expiry_date, real_expiry_date)
 
@@ -56,5 +62,9 @@ class ExpiryDateCalculatorTest(unittest.TestCase):
         self.assertExpiryDate("140130", 610000, "200229")
 
     def test_pay_before_expiry_date(self):
-        self.assertExpiryDate("220115", 10000, "220217", "220117")  # 220117에 만료되는 사람이 220115에 1만원 납부
-        self.assertExpiryDate("231007", 110000, "250101", "231201")  # 231201에 만료되는 사람이 231007에 11만원 납부
+        self.assertExpiryDate("220115", 10000, "220217", last_expiry_date="220117", first_pay_date="210617")
+        self.assertExpiryDate("231007", 110000, "250101", last_expiry_date="231201", first_pay_date="200401")
+
+    def test_pay_before_expiry_date_but_first_pay_date_is_different(self):
+        self.assertExpiryDate("220115", 10000, "220331", last_expiry_date="220228", first_pay_date="190331")
+        self.assertExpiryDate("190615", 100000, "210228", last_expiry_date="200229", first_pay_date="190430")
