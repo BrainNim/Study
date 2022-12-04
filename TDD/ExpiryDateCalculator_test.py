@@ -43,3 +43,12 @@ class ExpiryDateCalculatorTest(unittest.TestCase):
     def test_pay_100000_then_1_year(self):
         self.assertExpiryDate("230101", 100000, "240101")
         self.assertExpiryDate("240215", 100000, "250215")
+
+    def test_pay_110000to190000_then_1_year_and_2to9_month(self):
+        self.assertExpiryDate("230101", 130000, "240401")
+        self.assertExpiryDate("200331", 180000, "211130")
+
+    def test_pay_more_than_200000(self):
+        self.assertExpiryDate("220101", 200000, "240101")
+        self.assertExpiryDate("220101", 250000, "240601")
+        self.assertExpiryDate("140130", 610000, "200229")
