@@ -6,10 +6,14 @@ from ExpiryDateCalculator import Calculator
 class ExpiryDateCalculatorTest(unittest.TestCase):
     cal = Calculator()
 
-    def assertExpiryDate(self, pay_date, pay_amount, real_expiry_date):
+    def assertExpiryDate(self, pay_date, pay_amount, real_expiry_date, last_expiry_date=None):
         pay_date = datetime.strptime(pay_date, "%y%m%d")
         if real_expiry_date != "INVALID":
             real_expiry_date = datetime.strptime(real_expiry_date, "%y%m%d")
+
+        if last_expiry_date != None:
+            pay_date = datetime.strptime(last_expiry_date, "%y%m%d")
+
         estimate_expiry_date = self.cal.calculateExpiryDate(pay_date, pay_amount)
         self.assertEqual(estimate_expiry_date, real_expiry_date)
 
@@ -52,3 +56,7 @@ class ExpiryDateCalculatorTest(unittest.TestCase):
         self.assertExpiryDate("220101", 200000, "240101")
         self.assertExpiryDate("220101", 250000, "240601")
         self.assertExpiryDate("140130", 610000, "200229")
+
+    def test_pay_before_expiry_date(self):
+        self.assertExpiryDate("220115", 10000, "220217", "220117")  # 220117에 만료되는 사람이 220115에 1만원 납부
+        self.assertExpiryDate("231007", 110000, "250101", "231201")  # 231201에 만료되는 사람이 231007에 11만원 납부
