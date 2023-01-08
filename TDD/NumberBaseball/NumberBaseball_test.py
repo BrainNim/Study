@@ -31,3 +31,13 @@ class NumberBaseballTest(unittest.TestCase):
     def test_guess_two_right_number_but_wrong_location_then_2B(self):
         self.assertGuessResult("369", "938", "0S 2B")
         self.assertGuessResult("106", "069", "0S 2B")
+
+    def test_guess_three_right_number_but_wrong_location_then_3B(self):
+        self.assertGuessResult("369", "936", "0S 3B")
+        self.assertGuessResult("106", "061", "0S 3B")
+
+    def test_guess_mix_strike_and_ball(self):
+        self.assertGuessResult("369", "639", "1S 2B")
+        self.assertGuessResult("106", "016", "1S 2B")
+        self.assertGuessResult("369", "962", "1S 1B")
+        self.assertGuessResult("106", "716", "1S 1B")
