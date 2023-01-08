@@ -3,12 +3,11 @@ import unittest
 from NumberBaseball import Game
 
 class NumberBaseballTest(unittest.TestCase):
+    def assertGuessResult(self, correct_answer, guess_answer, right_chk_result):
+        game = Game(correct_answer)
+        game_chk_result = game.guess_checker(guess_answer)
+        self.assertEqual(right_chk_result, game_chk_result)
 
     def test_guess_correct_answer_then_3S(self):
-        game = Game("369")
-        result = game.guess_checker("369")
-        self.assertEqual("3S", result)
-
-        game1 = Game("106")
-        result1 = game1.guess_checker("106")
-        self.assertEqual("3S", result1)
+        self.assertGuessResult("369", "369", "3S")
+        self.assertGuessResult("106", "106", "3S")
