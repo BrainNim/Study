@@ -17,9 +17,17 @@ class NumberBaseballTest(unittest.TestCase):
         self.assertGuessResult("106", "275", "OUT")
 
     def test_guess_just_one_right_number_right_location_then_1S(self):
-        self.assertGuessResult("369", "382", "1S")
-        self.assertGuessResult("106", "709", "1S")
+        self.assertGuessResult("369", "382", "1S 0B")
+        self.assertGuessResult("106", "709", "1S 0B")
 
     def test_guess_two_right_number_right_location_then_1S(self):
-        self.assertGuessResult("369", "362", "2S")
-        self.assertGuessResult("106", "706", "2S")
+        self.assertGuessResult("369", "362", "2S 0B")
+        self.assertGuessResult("106", "706", "2S 0B")
+
+    def test_guess_one_right_number_but_wrong_location_then_1B(self):
+        self.assertGuessResult("369", "238", "0S 1B")
+        self.assertGuessResult("106", "079", "0S 1B")
+
+    def test_guess_two_right_number_but_wrong_location_then_2B(self):
+        self.assertGuessResult("369", "938", "0S 2B")
+        self.assertGuessResult("106", "069", "0S 2B")

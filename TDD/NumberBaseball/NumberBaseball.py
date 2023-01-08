@@ -9,8 +9,8 @@ class Game:
             self.correct_anser = ''.join(self.correct_anser)
 
     def guess_checker(self, guess):
-        # if guess == self.correct_anser:
-        #     return "3S"
+        if guess == self.correct_anser:
+            return "3S"
 
         # out check
         out_checker = 0
@@ -21,10 +21,19 @@ class Game:
         if out_checker == 3:
             return "OUT"
 
+        # ball check
+        ball_checker = 0
+        for n in guess:
+            if n in self.correct_anser:
+                ball_checker += 1
+
         # strike check
         strike_checker = 0
         for i in range(3):  # 3자리 수 숫자
             if guess[i] == self.correct_anser[i]:
                 strike_checker += 1
 
-        return f"{strike_checker}S"
+        # revise ball check
+        ball_checker -= strike_checker
+
+        return f"{strike_checker}S {ball_checker}B"
