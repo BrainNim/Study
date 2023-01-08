@@ -12,20 +12,18 @@ class Game:
         if guess == self.correct_anser:
             return "3S"
 
-        # out check
+        # out/ball check
         out_checker = 0
+        ball_checker = 0
         for n in guess:
-            if n not in self.correct_anser:
+            if n in self.correct_anser:
+                ball_checker += 1
+            else:
                 out_checker += 1
 
         if out_checker == 3:
             return "OUT"
 
-        # ball check
-        ball_checker = 0
-        for n in guess:
-            if n in self.correct_anser:
-                ball_checker += 1
 
         # strike check
         strike_checker = 0
