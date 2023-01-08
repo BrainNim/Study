@@ -11,3 +11,7 @@ class NumberBaseballTest(unittest.TestCase):
     def test_guess_correct_answer_then_3S(self):
         self.assertGuessResult("369", "369", "3S")
         self.assertGuessResult("106", "106", "3S")
+
+    def test_guess_all_wrong_answer_then_OUT(self):
+        self.assertGuessResult("369", "145", "OUT")
+        self.assertGuessResult("369", "145", "OUT")

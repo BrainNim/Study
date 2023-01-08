@@ -12,5 +12,15 @@ class Game:
         if guess == self.correct_anser:
             return "3S"
 
+        each_num_list = guess.split()
+
+        out_checker = True
+        for n in each_num_list:
+            if n in self.correct_anser:
+                out_checker = False
+
+        if out_checker:
+            return "OUT"
+
         else:
             return f"test용 print : {self.correct_anser}"
