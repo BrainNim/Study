@@ -14,4 +14,8 @@ class NumberBaseballTest(unittest.TestCase):
 
     def test_guess_all_wrong_answer_then_OUT(self):
         self.assertGuessResult("369", "145", "OUT")
-        self.assertGuessResult("369", "145", "OUT")
+        self.assertGuessResult("106", "275", "OUT")
+
+    # def test_guess_just_one_right_number_right_location_then_1S(self):
+    #     self.assertGuessResult("369", "382", "1S")
+    #     self.assertGuessResult("106", "709", "1S")
