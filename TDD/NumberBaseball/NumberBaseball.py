@@ -12,6 +12,9 @@ class Game:
         if len(guess) != 3:
             return "LENGTH_ERROR"
 
+        if len(set(guess)) !=3:
+            return "DUPLICATE_ERROR"
+
         if guess == self.correct_anser:
             return "3S"
 
@@ -51,6 +54,10 @@ if __name__ == '__main__':
         if result == "LENGTH_ERROR":
             print("입력숫자 에러!! 세자리 숫자만 입력해 주세요")
             continue
+        elif result == "DUPLICATE_ERROR":
+            print("입력숫자 에러!! 동일한 숫자를 중복으로 입력할 수 없습니다")
+            continue
+
         print(result)
         count += 1
 

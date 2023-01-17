@@ -45,3 +45,7 @@ class NumberBaseballTest(unittest.TestCase):
     def test_guess_more_or_less_than_3_length_then_length_error(self):
         self.assertGuessResult("369", "1", "LENGTH_ERROR")
         self.assertGuessResult("369", "12345678", "LENGTH_ERROR")
+
+    def test_guess_duplicate_number_then_duplicate_error(self):
+        self.assertGuessResult("369", "333", "DUPLICATE_ERROR")
+        self.assertGuessResult("369", "110", "DUPLICATE_ERROR")
