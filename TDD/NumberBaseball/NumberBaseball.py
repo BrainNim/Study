@@ -1,7 +1,7 @@
 import random
 
 class Game:
-    def __init__(self, correct_answer):
+    def __init__(self, correct_answer=None):
         if correct_answer:
             self.correct_anser = correct_answer
         else:
@@ -35,3 +35,18 @@ class Game:
         ball_checker -= strike_checker
 
         return f"{strike_checker}S {ball_checker}B"
+
+
+if __name__ == '__main__':
+    game = Game()
+
+    result = ""
+    count = 0
+    while result != "3S":
+        count += 1
+        guess = input("3자리 숫자입력 : ")
+        result = game.guess_checker(guess)
+        print(result)
+
+    print(f"축하합니다. 정답은 {game.correct_anser} 였습니다")
+    print(f"{count}번 만에 정답을 맞췄습니다!")
