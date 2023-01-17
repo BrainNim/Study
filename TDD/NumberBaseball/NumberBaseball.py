@@ -41,7 +41,7 @@ class Game:
 
 
 if __name__ == '__main__':
-    game = Game("369")
+    game = Game()
 
     result = ""
     count = 0
