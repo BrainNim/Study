@@ -9,6 +9,9 @@ class Game:
             self.correct_anser = ''.join(self.correct_anser)
 
     def guess_checker(self, guess):
+        if len(guess) != 3:
+            return "LENGTH_ERROR"
+
         if guess == self.correct_anser:
             return "3S"
 
@@ -38,15 +41,19 @@ class Game:
 
 
 if __name__ == '__main__':
-    game = Game()
+    game = Game("369")
 
     result = ""
     count = 0
     while result != "3S":
-        count += 1
         guess = input("3자리 숫자입력 : ")
         result = game.guess_checker(guess)
+        if result == "LENGTH_ERROR":
+            print("입력숫자 에러!! 세자리 숫자만 입력해 주세요")
+            continue
         print(result)
+        count += 1
+
 
     print(f"축하합니다. 정답은 {game.correct_anser} 였습니다")
     print(f"{count}번 만에 정답을 맞췄습니다!")
