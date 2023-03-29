@@ -57,10 +57,15 @@ export PATH="(사용할 경로):$PATH"
 
 
 ## nohup 활용
+#### nohup활용 파일 실행
+`nohup python3 filename.py`  
+`nohup python3 -u filename.py` (print까지 log로 기록할 경우)
+
 #### nohup 로그 확인
 #### 기본  
 tail 명령어를 활용해 마지막 로그 (default:10 lines)를 확인  
 `tail nohup.out`  
+
 #### 옵션
 `-f`: 실시간 로그를 계속 출력  
 예) `tail -f nohup.out`
